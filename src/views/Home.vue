@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" class="w-full mb-5" />
-    <a-button type="primary"> Primary </a-button>
+    <a-button type="primary" @click="incrementStateCount">
+      Increment State Count
+    </a-button>
+    <a-button type="default" @click="updateStateCount">
+      Update State Count
+    </a-button>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
@@ -19,5 +24,12 @@ Vue.use(Button);
     HelloWorld,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  incrementStateCount(): void {
+    this.$store.dispatch('incrementCountAction');
+  }
+  updateStateCount(): void {
+    this.$store.dispatch('updateCountAction');
+  }
+}
 </script>
