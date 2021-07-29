@@ -1,8 +1,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-// import Component from 'vue-class-component';
 import { Layout, Menu, Icon, Breadcrumb } from 'ant-design-vue';
 import '@/assets/styles/global.scss';
+
+import { getCategories } from '@/api/getCategories';
 
 let useComponents = [Layout, Menu, Icon, Breadcrumb];
 
@@ -12,8 +13,24 @@ useComponents.forEach((item) => {
 
 @Component
 export default class App extends Vue {
-  mounted() {
+  created(): void {
+    console.log('App Component created');
+    this.fetchCategories();
+  }
+
+  mounted(): void {
     console.log('App Component mounted');
+  }
+
+  async fetchCategories(): Promise<string> {
+    let data;
+    try {
+      data = await getCategories();
+      console.log('Categories: ', data);
+    } catch (err) {
+      console.log(err);
+    }
+    return data;
   }
 }
 </script>
