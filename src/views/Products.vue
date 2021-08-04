@@ -69,15 +69,12 @@ export default class Products extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .ant-card-cover img {
   object-fit: contain;
   min-height: 280px;
   max-height: 280px;
   display: inline-block;
   padding: 12px;
-}
-.price {
-  color: orange;
 }
 </style>

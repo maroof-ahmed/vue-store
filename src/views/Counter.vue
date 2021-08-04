@@ -1,5 +1,9 @@
 <template>
   <div class="counter">
+    <div class="price">
+      Total Price: {{ (product.price * value).toFixed(2) }}
+    </div>
+    <br />
     <a-button type="primary" @click="subtractFromCounter"> - </a-button>
     <strong class="p-2">{{ value }}</strong>
     <a-button type="primary" @click="addToCounter"> + </a-button>
