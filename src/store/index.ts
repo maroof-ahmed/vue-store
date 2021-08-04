@@ -10,11 +10,12 @@ export default new Vuex.Store({
     products: [],
   },
   mutations: {
-    increment(state) {
+    setIncrementCount(state) {
       state.count++;
     },
-    setNewValue(state, newValue) {
-      state.count = newValue;
+    setDecrementCount(state) {
+      if (state.count == 0) return;
+      state.count--;
     },
     setProducts(state, payload) {
       state.products = payload;
@@ -22,10 +23,10 @@ export default new Vuex.Store({
   },
   actions: {
     incrementCountAction({ commit }) {
-      commit('increment');
+      commit('setIncrementCount');
     },
-    updateCountAction({ commit }) {
-      commit('setNewValue', 3);
+    decrementCountAction({ commit }) {
+      commit('setDecrementCount');
     },
 
     async fetchAllProducts({ commit }) {

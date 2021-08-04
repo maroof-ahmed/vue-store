@@ -16,7 +16,7 @@
           <div>
             <h3>Price: {{ product.price }}</h3>
             <p>{{ product.description }}</p>
-            <!-- <Counter :product="product"></Counter> -->
+            <Counter :product="product"></Counter>
           </div>
         </a-col>
       </div>
@@ -28,6 +28,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { getProduct } from '@/api/getProduct';
 import { Row, Col, Skeleton, PageHeader } from 'ant-design-vue';
+import Counter from '@/views/Counter.vue';
 
 let useComponents = [Row, Col, Skeleton, PageHeader];
 
@@ -35,7 +36,11 @@ useComponents.forEach((item) => {
   Vue.use(item);
 });
 
-@Component({})
+@Component({
+  components: {
+    Counter,
+  },
+})
 export default class ProductDetails extends Vue {
   product = null;
 
