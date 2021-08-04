@@ -6,27 +6,40 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    count: 0,
+    cart: [] as any[],
     products: [],
   },
   mutations: {
-    setIncrementCount(state) {
-      state.count++;
-    },
-    setDecrementCount(state) {
-      if (state.count == 0) return;
-      state.count--;
-    },
     setProducts(state, payload) {
       state.products = payload;
     },
+    addProductToCart(state, payload) {
+      console.log(payload);
+      let check = true;
+
+      state.cart.forEach((element: any) => {
+        if (element.id === payload.id) {
+          element.value = payload.value;
+          check = false;
+        }
+      });
+      if (check) {
+        state.cart.push(payload);
+      }
+    },
+    removeProductToCart(state, id) {
+      if (!id) {
+        return;
+      }
+      state.cart = [...state.cart.filter((v) => v.id !== id)];
+    },
   },
   actions: {
-    incrementCountAction({ commit }) {
-      commit('setIncrementCount');
+    addProductToCartAction({ commit }, payload) {
+      commit('addProductToCart', payload);
     },
-    decrementCountAction({ commit }) {
-      commit('setDecrementCount');
+    removeProductToCart({ commit }, id) {
+      commit('removeProductToCart', id);
     },
 
     async fetchAllProducts({ commit }) {
