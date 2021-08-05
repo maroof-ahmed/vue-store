@@ -27,6 +27,22 @@ export default new Vuex.Store({
         state.cart.push(payload);
       }
     },
+    increaseDecreaseCartCount(state, payload) {
+      state.cart.forEach((element) => {
+        if (element.id === payload.id && payload.type === 'increase') {
+          console.log('increase', state.cart);
+          element.value++;
+        }
+        if (
+          element.id === payload.id &&
+          payload.type === 'decrease' &&
+          element.value > 0
+        ) {
+          console.log('decrease', state.cart);
+          element.value--;
+        }
+      });
+    },
     removeProductToCart(state, id) {
       if (!id) {
         return;
@@ -40,6 +56,9 @@ export default new Vuex.Store({
     },
     removeProductToCart({ commit }, id) {
       commit('removeProductToCart', id);
+    },
+    increaseDecreaseCartAction({ commit }, payload) {
+      commit('increaseDecreaseCartCount', payload);
     },
 
     async fetchAllProducts({ commit }) {

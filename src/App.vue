@@ -1,11 +1,11 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { Layout, Menu, Icon, Breadcrumb } from 'ant-design-vue';
+import { Layout, Menu, Icon, Breadcrumb, Badge } from 'ant-design-vue';
 import '@/assets/styles/global.scss';
 
 import { getCategories } from '@/api/getCategories';
 
-let useComponents = [Layout, Menu, Icon, Breadcrumb];
+let useComponents = [Layout, Menu, Icon, Breadcrumb, Badge];
 
 useComponents.forEach((item) => {
   Vue.use(item);
@@ -68,6 +68,16 @@ export default class App extends Vue {
               <a-menu-item key="setting:3"> Option 3 </a-menu-item>
               <a-menu-item key="setting:4"> Option 4 </a-menu-item>
             </a-menu-item-group>
+          </a-sub-menu>
+
+          <a-sub-menu theme="dark" mode="horizontal" class="float-right">
+            <span slot="title" class="submenu-title-wrapper">
+              <a-badge :count="$store.state.cart.length">
+                <router-link to="/cart">
+                  <a-icon type="shopping-cart" />
+                </router-link>
+              </a-badge>
+            </span>
           </a-sub-menu>
         </a-menu>
       </a-layout-header>
