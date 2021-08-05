@@ -38,7 +38,7 @@
               slot="actions"
               type="danger"
               shape="circle"
-              @click="$store.dispatch('removeProductToCart', item.id)"
+              @click="$store.dispatch('removeProductToCartAction', item.id)"
             >
               <a-icon type="delete" />
             </a-button>

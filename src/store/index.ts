@@ -31,7 +31,6 @@ export default new Vuex.Store({
       state.cart = [
         ...state.cart.map((element) => {
           if (element.id === payload.id && payload.type === 'increase') {
-            console.log('increase', state.cart);
             element.value++;
           }
           if (
@@ -39,7 +38,6 @@ export default new Vuex.Store({
             payload.type === 'decrease' &&
             element.value > 0
           ) {
-            console.log('decrease', state.cart);
             element.value--;
           }
           return element;
@@ -57,7 +55,7 @@ export default new Vuex.Store({
     addProductToCartAction({ commit }, payload) {
       commit('addProductToCart', payload);
     },
-    removeProductToCart({ commit }, id) {
+    removeProductToCartAction({ commit }, id) {
       commit('removeProductToCart', id);
     },
     increaseDecreaseCartAction({ commit }, payload) {
