@@ -28,20 +28,23 @@ export default new Vuex.Store({
       }
     },
     increaseDecreaseCartCount(state, payload) {
-      state.cart.forEach((element) => {
-        if (element.id === payload.id && payload.type === 'increase') {
-          console.log('increase', state.cart);
-          element.value++;
-        }
-        if (
-          element.id === payload.id &&
-          payload.type === 'decrease' &&
-          element.value > 0
-        ) {
-          console.log('decrease', state.cart);
-          element.value--;
-        }
-      });
+      state.cart = [
+        ...state.cart.map((element) => {
+          if (element.id === payload.id && payload.type === 'increase') {
+            console.log('increase', state.cart);
+            element.value++;
+          }
+          if (
+            element.id === payload.id &&
+            payload.type === 'decrease' &&
+            element.value > 0
+          ) {
+            console.log('decrease', state.cart);
+            element.value--;
+          }
+          return element;
+        }),
+      ];
     },
     removeProductToCart(state, id) {
       if (!id) {
