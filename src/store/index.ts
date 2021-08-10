@@ -12,6 +12,22 @@ export default new Vuex.Store({
     confirmLoading: false,
   },
   mutations: {
+    sortAssending(state) {
+      console.log('bbbbbbbbbbb');
+      state.products = [
+        ...state.products.sort(function (a: any, b: any) {
+          return a.price - b.price;
+        }),
+      ];
+    },
+    sortDesending(state) {
+      console.log('aaaaaaaaaaa');
+      state.products = [
+        ...state.products.sort(function (a: any, b: any) {
+          return b.price - a.price;
+        }),
+      ];
+    },
     setProducts(state, payload) {
       state.products = payload;
     },

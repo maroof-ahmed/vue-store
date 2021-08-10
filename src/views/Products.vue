@@ -1,12 +1,12 @@
 <template>
   <div class="products mt-5">
-    <a-skeleton v-if="!products.length" />
+    <a-skeleton v-if="!$store.state.products.length" />
     <a-row :gutter="[20, 20]">
       <a-col
         class="gutter-row"
         :lg="{ span: 12 }"
         :xl="{ span: 8 }"
-        v-for="product in products"
+        v-for="product in $store.state.products"
         :key="product.id"
       >
         <a-card @click="openThisProduct(product)" hoverable>
@@ -49,7 +49,7 @@ useComponents.forEach((item) => {
 
 @Component({})
 export default class Products extends Vue {
-  products = [];
+  // products = [];
 
   created(): void {
     this.getAllProducts();
@@ -59,7 +59,7 @@ export default class Products extends Vue {
     let data;
     await this.$store.dispatch('fetchAllProducts');
     data = this.$store.state.products;
-    this.products = data;
+    // this.products = data;
     return data;
   }
 

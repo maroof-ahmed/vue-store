@@ -3,7 +3,17 @@
     <a-page-header
       style="border: 1px solid rgb(235, 237, 240)"
       title="Products"
-    />
+    >
+      <template slot="extra">
+        sort by price
+        <a-button key="3" @click="$store.commit('sortDesending')">
+          Assending
+        </a-button>
+        <a-button key="2" @click="$store.commit('sortAssending')">
+          desending
+        </a-button>
+      </template>
+    </a-page-header>
     <Products />
   </div>
 </template>
