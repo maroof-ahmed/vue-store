@@ -31,7 +31,7 @@ export default new Vuex.Store({
     },
     increaseDecreaseCartCount(state, payload) {
       const updatedCart = state.cart.map((element) => {
-        if (element.id !== payload.id) return;
+        if (element.id !== payload.id) return element;
 
         if (payload.type === 'increase') {
           element.value++;
