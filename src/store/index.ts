@@ -8,6 +8,8 @@ export default new Vuex.Store({
   state: {
     cart: [] as any[],
     products: [],
+    visible: false,
+    confirmLoading: false,
   },
   mutations: {
     setProducts(state, payload) {
@@ -48,7 +50,18 @@ export default new Vuex.Store({
       if (!id) {
         return;
       }
-      state.cart = [...state.cart.filter((v) => v.id !== id)];
+      state.confirmLoading = true;
+      setTimeout(() => {
+        state.cart = [...state.cart.filter((v) => v.id !== id)];
+        state.confirmLoading = false;
+        state.visible = false;
+      }, 2000);
+    },
+    handleCancel(state) {
+      state.visible = false;
+    },
+    handleShowModal(state) {
+      state.visible = true;
     },
   },
   actions: {
@@ -60,6 +73,12 @@ export default new Vuex.Store({
     },
     increaseDecreaseCartAction({ commit }, payload) {
       commit('increaseDecreaseCartCount', payload);
+    },
+    handleCancelAction({ commit }) {
+      commit('handleCancel');
+    },
+    handleShowModalAction({ commit }) {
+      commit('handleShowModal');
     },
 
     async fetchAllProducts({ commit }) {

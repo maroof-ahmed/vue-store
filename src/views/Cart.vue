@@ -7,7 +7,7 @@
           item-layout="horizontal"
           :data-source="$store.state.cart"
         >
-          <a-list-item slot="renderItem" slot-scope="item">
+          <a-list-item :key="item.id" slot="renderItem" slot-scope="item">
             <a-button
               slot="actions"
               type="primary"
@@ -38,7 +38,7 @@
               slot="actions"
               type="danger"
               shape="circle"
-              @click="$store.dispatch('removeProductToCartAction', item.id)"
+              @click="showModal(item.id, item.title)"
             >
               <a-icon type="delete" />
             </a-button>
@@ -54,12 +54,14 @@
         </a-list>
       </a-col>
     </a-row>
+    <ConfirmModal :discription="discription" :onOk="onOk" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Row, Col, List, Button, Icon } from 'ant-design-vue';
+import ConfirmModal from '@/views/ConfirmModal.vue';
 
 let useComponents = [Row, Col, List, Button, Icon];
 
@@ -67,8 +69,25 @@ useComponents.forEach((items) => {
   Vue.use(items);
 });
 
-@Component({})
-export default class Cart extends Vue {}
+@Component({
+  components: {
+    ConfirmModal,
+  },
+})
+export default class Cart extends Vue {
+  selectedId: number;
+  discription = '';
+
+  showModal(id: number, title: string): void {
+    this.selectedId = id;
+    this.discription = 'Do you want to delete these ' + title;
+    this.$store.dispatch('handleShowModalAction');
+  }
+
+  onOk(): void {
+    this.$store.dispatch('removeProductToCartAction', this.selectedId);
+  }
+}
 </script>
 
 <style lang="scss" scoped>
