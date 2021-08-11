@@ -12,16 +12,14 @@ export default new Vuex.Store({
     confirmLoading: false,
   },
   mutations: {
-    sortAssending(state) {
-      console.log('bbbbbbbbbbb');
+    sortAscending(state) {
       state.products = [
         ...state.products.sort(function (a: any, b: any) {
           return a.price - b.price;
         }),
       ];
     },
-    sortDesending(state) {
-      console.log('aaaaaaaaaaa');
+    sortDescending(state) {
       state.products = [
         ...state.products.sort(function (a: any, b: any) {
           return b.price - a.price;
@@ -95,6 +93,12 @@ export default new Vuex.Store({
     },
     handleShowModalAction({ commit }) {
       commit('handleShowModal');
+    },
+    sortAscendingAction({ commit }) {
+      commit('sortAscending');
+    },
+    sortDescendingAction({ commit }) {
+      commit('sortDescending');
     },
 
     async fetchAllProducts({ commit }) {

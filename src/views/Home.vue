@@ -5,12 +5,12 @@
       title="Products"
     >
       <template slot="extra">
-        sort by price
-        <a-button key="3" @click="$store.commit('sortDesending')">
-          Assending
+        <strong>sort by price:</strong>
+        <a-button key="3" @click="$store.dispatch('sortAscendingAction')">
+          Low to High
         </a-button>
-        <a-button key="2" @click="$store.commit('sortAssending')">
-          desending
+        <a-button key="2" @click="$store.dispatch('sortDescendingAction')">
+          High to Low
         </a-button>
       </template>
     </a-page-header>
