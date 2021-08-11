@@ -30,5 +30,10 @@ Vue.use(PageHeader);
     Products,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  created(): void {
+    console.log('App Component created');
+    this.$store.state.products = [];
+  }
+}
 </script>
