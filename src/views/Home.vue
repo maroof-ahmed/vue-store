@@ -32,7 +32,6 @@ Vue.use(PageHeader);
 })
 export default class Home extends Vue {
   created(): void {
-    console.log('App Component created');
     this.$store.state.products = [];
   }
 }
