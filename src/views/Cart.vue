@@ -63,7 +63,11 @@
               />
             </a-col>
             <a-col :span="8">
-              <a-button type="primary" @click="gotoCheckoutPage">
+              <a-button
+                style="margin-left: 30px"
+                type="primary"
+                @click="gotoCheckoutPage"
+              >
                 Checkout
               </a-button></a-col
             >
