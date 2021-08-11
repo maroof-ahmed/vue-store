@@ -53,6 +53,31 @@
           </a-list-item>
         </a-list>
       </a-col>
+      <a-col :span="8">
+        <a-affix :offset-top="120">
+          <a-row>
+            <a-col :span="16">
+              <a-alert
+                :message="'total Bill ' + $store.getters.getTotalBill"
+                type="success"
+              />
+            </a-col>
+            <a-col :span="8">
+              <a-button type="primary" @click="gotoCheckoutPage">
+                Checkout
+              </a-button></a-col
+            >
+          </a-row>
+          <br />
+          <a-table
+            :columns="columns"
+            :data-source="$store.getters.getBillBreakDown"
+            :scroll="{ y: 440 }"
+          >
+            <a slot="name" slot-scope="text">{{ text }}</a>
+          </a-table>
+        </a-affix>
+      </a-col>
     </a-row>
     <ConfirmModal :discription="discription" :onOk="onOk" />
   </div>
@@ -60,10 +85,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Row, Col, List, Button, Icon } from 'ant-design-vue';
+import {
+  Row,
+  Col,
+  List,
+  Button,
+  Icon,
+  Table,
+  Affix,
+  Alert,
+} from 'ant-design-vue';
 import ConfirmModal from '@/views/ConfirmModal.vue';
 
-let useComponents = [Row, Col, List, Button, Icon];
+let useComponents = [Row, Col, List, Button, Icon, Table, Affix, Alert];
 
 useComponents.forEach((items) => {
   Vue.use(items);
@@ -77,7 +111,32 @@ useComponents.forEach((items) => {
 export default class Cart extends Vue {
   selectedId: number;
   discription = '';
-
+  columns = [
+    {
+      title: 'Title',
+      dataIndex: 'title',
+      key: 'title',
+      scopedSlots: { customRender: 'title' },
+    },
+    {
+      title: 'Count',
+      dataIndex: 'value',
+      key: 'value',
+      // width: 80,
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+      ellipsis: true,
+    },
+    {
+      title: 'Total/Product',
+      dataIndex: 'total',
+      key: 'total',
+      ellipsis: true,
+    },
+  ];
   showModal(id: number, title: string): void {
     this.selectedId = id;
     this.discription = 'Do you want to delete these ' + title;
