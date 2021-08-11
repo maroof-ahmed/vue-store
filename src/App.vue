@@ -72,7 +72,7 @@ export default class App extends Vue {
 
           <a-sub-menu theme="dark" mode="horizontal" class="float-right">
             <span slot="title" class="submenu-title-wrapper">
-              <a-badge :count="$store.state.cart.length">
+              <a-badge :count="$store.getters.allProductLength">
                 <router-link to="/cart">
                   <a-icon type="shopping-cart" />
                 </router-link>
