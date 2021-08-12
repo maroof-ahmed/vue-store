@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <a-row :gutter="[50, 0]">
-      <a-col :span="16">
+      <a-col :span="14">
         <a-list
           class="demo-loadmore-list"
           item-layout="horizontal"
@@ -53,33 +53,34 @@
           </a-list-item>
         </a-list>
       </a-col>
-      <a-col :span="8">
-        <a-affix :offset-top="120">
-          <a-row>
-            <a-col :span="16">
+      <a-col :span="10">
+        <a-affix :offset-top="20">
+          <a-table
+            :columns="columns"
+            :data-source="$store.getters.getBillBreakDown"
+            :scroll="{ y: 340 }"
+          >
+            <a slot="name" slot-scope="text">{{ text }}</a>
+          </a-table>
+          <br />
+          <a-row type="flex" justify="center">
+            <a-col class="mb-5" :span="24">
               <a-alert
-                :message="'total Bill ' + $store.getters.getTotalBill"
+                :message="'Total Bill ' + $store.getters.getTotalBill"
                 type="success"
               />
             </a-col>
-            <a-col :span="8">
+            <a-col :span="12">
               <a-button
-                style="margin-left: 30px"
                 type="primary"
+                size="large"
+                block
                 @click="gotoCheckoutPage"
               >
                 Checkout
               </a-button></a-col
             >
           </a-row>
-          <br />
-          <a-table
-            :columns="columns"
-            :data-source="$store.getters.getBillBreakDown"
-            :scroll="{ y: 440 }"
-          >
-            <a slot="name" slot-scope="text">{{ text }}</a>
-          </a-table>
         </a-affix>
       </a-col>
     </a-row>
