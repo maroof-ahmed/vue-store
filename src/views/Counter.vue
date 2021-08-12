@@ -15,7 +15,7 @@
         class="ml-2"
         v-show="value > 0"
         type="danger"
-        @click="$store.dispatch('removeProductToCart', product.id)"
+        @click="removeToCart"
       >
         Remove From cart
       </a-button>
@@ -50,6 +50,9 @@ export default class Counter extends Vue {
   addToCart(): void {
     this.product.value = this.value;
     this.$store.dispatch('addProductToCartAction', this.product);
+  }
+  removeToCart(): void {
+    this.$store.commit('removeProductToCart', this.product.id);
   }
   updateValue(): void {
     let check = this.$store.state.cart.find(
