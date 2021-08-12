@@ -52,7 +52,7 @@ export default class Counter extends Vue {
     this.$store.dispatch('addProductToCartAction', this.product);
   }
   removeToCart(): void {
-    this.$store.commit('removeProductToCart', this.product.id);
+    this.$store.commit('removeProductToCart', { id: this.product.id });
   }
   updateValue(): void {
     let check = this.$store.state.cart.find(

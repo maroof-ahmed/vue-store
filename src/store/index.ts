@@ -60,7 +60,7 @@ export default new Vuex.Store({
 
       state.cart = [...updatedCart];
     },
-    removeProductToCart(state, id) {
+    removeProductToCart(state, { id, time = 0 }) {
       if (!id) {
         return;
       }
@@ -69,7 +69,7 @@ export default new Vuex.Store({
         state.cart = [...state.cart.filter((v) => v.id !== id)];
         state.confirmLoading = false;
         state.visible = false;
-      }, 2000);
+      }, time);
     },
     handleCancel(state) {
       state.visible = false;
@@ -83,7 +83,7 @@ export default new Vuex.Store({
       commit('addProductToCart', payload);
     },
     removeProductToCartAction({ commit }, id) {
-      commit('removeProductToCart', id);
+      commit('removeProductToCart', { id, time: 2000 });
     },
     increaseDecreaseCartAction({ commit }, payload) {
       commit('increaseDecreaseCartCount', payload);
